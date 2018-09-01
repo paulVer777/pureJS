@@ -11,36 +11,33 @@ const saveToStorage=(arr) => localStorage.setItem('Todos',JSON.stringify(arr))
 const renderFilteredTodos = (arr, filters) => {
     console.log(arr)
      
-    let filteredArr=arr.sort((a,b)=>{
+    let filteredArr=sortingFunction(arr,filters)
+    
 
-     if(filters.sortBy === 'alphabetically') return a.title[0].toLowerCase() < b.title[0].toLowerCase() ? -1 : 1 
-     if(filters.sortBy === 'edited') return a.editedAt > b.editedAt ? -1 : 1
-     if(filters.sortBy === 'created') return a.createdAt < b.createdAt ? -1 :1 
-    })
-     console.log(filteredArr)
-    
-    
      filteredArr = arr.filter((value, index) => value.title.toLowerCase().includes(filters.searchValue.toLowerCase()))
     
     filteredArr=filteredArr.filter((value,index) => filters.completed ? ! value.completed : true )
 
-  
-  
-  
-  
-  
-  
-    createTodoDom(filteredArr, filters)
+    // Cleans the div before render elements
+
+    document.querySelector('#todo').innerHTML = ''
+
+
+    filteredArr.forEach((value,index)=>{
+
+   const item=createTodoDom(value)
+    
+    document.querySelector('#todos').appendChild(item)
+
+         
+    })
 }
 
 //////////////// Creates elements in DOM tree
 
-const createTodoDom = (arr, filters) => {
+const createTodoDom = (value) => {
 
-
-    document.querySelector('#todo').innerHTML = ''
-
-    arr.forEach((value, index) => {
+        document.querySelector('#todo').innerHTML = ''
 
         const div = document.createElement('div')
 
@@ -87,9 +84,14 @@ const createTodoDom = (arr, filters) => {
         div.appendChild(buttonEdit)
         div.appendChild(paragraph)
         div.appendChild(checkbox)
-        document.querySelector('#todo').appendChild(div)
-    });
+        
+        return div
+    
 }
+
+
+
+
 /////// Gets items from storage
 
 const getFromStorage = ()=> {
@@ -137,3 +139,18 @@ const lastEdition = (uid)=>{
 
    return item ? `Last edition was ${lastEdited.fromNow(moment())} ago ` : `This item hasn't been edited yet`
 }
+
+
+
+
+const sortingFunction=(arr,filters)=>{
+
+
+    return arr.sort((a,b)=>{
+
+   if(filters.sortBy === 'alphabetically') return a.title[0].toLowerCase() < b.title[0].toLowerCase() ? -1 : 1 
+   if(filters.sortBy === 'edited') return a.editedAt > b.editedAt ? -1 : 1
+   if(filters.sortBy === 'created') return a.createdAt < b.createdAt ? -1 :1 
+  })
+
+  }
