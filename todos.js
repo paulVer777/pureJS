@@ -1,7 +1,10 @@
 const todos = getFromStorage()
 
+
+
 const filters = {
-    searchValue: ''
+    searchValue: '',
+    completed:false
 }
 
 
@@ -23,7 +26,9 @@ document.querySelector('#adder').addEventListener('submit', (eventInfo) => {
     todos.push({
         title: eventInfo.target.elements.input1.value,
         completed: false,
-        id: uuidv4()
+        id: uuidv4(),
+        createdAt:moment().valueOf(),
+        editedAt:null
     })
 
     eventInfo.target.elements.input1.value = ''
@@ -31,10 +36,11 @@ document.querySelector('#adder').addEventListener('submit', (eventInfo) => {
     renderFilteredTodos(todos, filters)
 })
 
-// document.querySelector('#remove').addEventListener('click', (eventInfo) => {
+document.querySelector('#completed').addEventListener('change',(e) => {
 
-//     const removeItem = (arr,id)=>{
+filters.completed=e.target.checked
+renderFilteredTodos(todos,filters)
+})
 
-//     const index=arr.findIndex((value,index) =>  )
 
-//     }})
+console.log(moment().valueOf())

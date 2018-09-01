@@ -5,44 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo</title>
+    <title>Edit</title>
 
     <style>
+
         body{
             padding:2rem;
         }
-        #todo{
 
-      min-height: 30vh
-  }
- 
+        #editedAt{
+           
+           margin-left:10vw;
+          font-size: 1.5rem;
+
+    } 
+    
  </style>
 
 </head>
 
 <body>
-    <h1>Pure JS-todos</h1>
-    <label>
-        <input type='text' id='filter'> Search
-    </label>
-
-    <label>
-        <input type='checkbox' id='completed'> Hide completed
-    </label>
-
-    <div id='todo'>
-
-    </div>
-
-    <form id='adder'>
-        <input type="text" name="input1">
-        <button>Add todo</button>
-    </form>
+    <input type='text' id='inputEdit' placeholder='edit'>
+    <a href='/index.html'>Done</a>
+    <span id='editedAt'></span>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js'></script>
     <script src='functions.js'></script>
-    <script src="todos.js"></script>
-
+    <script src='edit.js'></script>
 </body>
 
 </html>
