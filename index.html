@@ -15,6 +15,9 @@
 
       min-height: 30vh
   }
+  #label-sort{
+      margin-left: 5vw;
+  }
  
  </style>
 
@@ -29,6 +32,15 @@
     <label>
         <input type='checkbox' id='completed'> Hide completed
     </label>
+
+    <label id='label-sort'>Sort By
+        <select id='sort-by'>
+            <option value='alphabetically'>Alphabetically</option>
+            <option value='created'>By created</option>
+            <option value='edited'>By edited</option>
+        </select>
+    </label>
+
 
     <div id='todo'>
 

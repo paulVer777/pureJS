@@ -9,11 +9,27 @@ const saveToStorage=(arr) => localStorage.setItem('Todos',JSON.stringify(arr))
 /////////////Filter arrays
 
 const renderFilteredTodos = (arr, filters) => {
+    console.log(arr)
+     
+    let filteredArr=arr.sort((a,b)=>{
 
-    let filteredArr = arr.filter((value, index) => value.title.toLowerCase().includes(filters.searchValue.toLowerCase()))
+     if(filters.sortBy === 'alphabetically') return a.title[0].toLowerCase() < b.title[0].toLowerCase() ? -1 : 1 
+     if(filters.sortBy === 'edited') return a.editedAt > b.editedAt ? -1 : 1
+     if(filters.sortBy === 'created') return a.createdAt < b.createdAt ? -1 :1 
+    })
+     console.log(filteredArr)
+    
+    
+     filteredArr = arr.filter((value, index) => value.title.toLowerCase().includes(filters.searchValue.toLowerCase()))
     
     filteredArr=filteredArr.filter((value,index) => filters.completed ? ! value.completed : true )
 
+  
+  
+  
+  
+  
+  
     createTodoDom(filteredArr, filters)
 }
 
@@ -120,7 +136,4 @@ const lastEdition = (uid)=>{
     const lastEdited= moment(todos[index].editedAt)
 
    return item ? `Last edition was ${lastEdited.fromNow(moment())} ago ` : `This item hasn't been edited yet`
-
-
-
 }

@@ -4,7 +4,8 @@ const todos = getFromStorage()
 
 const filters = {
     searchValue: '',
-    completed:false
+    completed:false,
+    sortBy:'alphabetically'
 }
 
 
@@ -43,4 +44,8 @@ renderFilteredTodos(todos,filters)
 })
 
 
-console.log(moment().valueOf())
+document.querySelector('#sort-by').addEventListener('change',(e)=>{
+
+    filters.sortBy=e.target.value
+    renderFilteredTodos(todos,filters)
+})
